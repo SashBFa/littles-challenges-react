@@ -1,15 +1,7 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-
-const BMIData = [
-  { name: "Maigreur", color: "text-teal-500", range: [0, 18.5] },
-  { name: "Bonne santé", color: "text-green-500", range: [18.5, 25] },
-  { name: "Surpoids", color: "text-red-400", range: [25, 30] },
-  { name: "Obésité modérée", color: "text-orange-500", range: [30, 35] },
-  { name: "Obésité sévère", color: "text-rose-800", range: [35, 40] },
-  { name: "Obésité morbide", color: "text-purple-900", range: 40 },
-];
+import { BMIData } from "../data/imc";
 
 const Imc = () => {
   const [imcSize, setImcSize] = useState<number | string>();
@@ -66,12 +58,12 @@ const Imc = () => {
   };
 
   return (
-    <main className="h-screen pt-16 bg-gradient-to-r from-sky-500 to-indigo-500">
-      <section className="relative bg-white p-6 shadow-md rounded-md flex flex-col items-center mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl xl:max-w-7xl ">
+    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-500 to-indigo-500">
+      <section className="relative bg-white p-6 shadow-md rounded-md flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
         <h1 className="text-center text-2xl mb-3">
           Calcul d'<b>IMC</b>
         </h1>
-        <div className="flex flex-col">
+        <div className="flex flex-col md:flex-row gap-6">
           <div>
             <label htmlFor="imcSize" className="pl-4">
               Votre taille en Cm, Ex: 180
