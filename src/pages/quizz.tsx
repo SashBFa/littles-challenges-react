@@ -147,7 +147,7 @@ const Quizz = () => {
           );
         })}
         <button
-          className="bg-amber-300 px-4 py-2 rounded-md shadow-md my-2 font-bold mt-8"
+          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-2 font-bold mt-8"
           onClick={handleResult}
         >
           Valider <FontAwesomeIcon icon={faCheck} className="ml-2" />

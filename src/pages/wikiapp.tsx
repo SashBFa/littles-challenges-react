@@ -57,7 +57,7 @@ const Wikiapp = () => {
             }}
           />
           <button
-            className="bg-blue-800 text-white px-4 py-2 rounded-md shadow-md font-bold h-12"
+            className="bg-gradient-to-b from-blue-800 to-blue-700 text-white px-4 py-2 rounded-md shadow-md font-bold h-12"
             onClick={handleSearch}
           >
             Recherche

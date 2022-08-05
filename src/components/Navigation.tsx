@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const router = ["home", "imc", "quizz", "wikiapp"];
+const router = ["home", "imc", "quizz", "wikiapp", "cookies"];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -25,22 +25,20 @@ const Navigation = () => {
         {router.map((route) => {
           if (route === "home") {
             return (
-              <Link to={"/"} onClick={() => setIsOpen(false)}>
-                <li
-                  key={route}
-                  className="shadow w-full h-10 mb-2 flex items-center pl-4 hover:bg-blue-400/10 text-xl"
-                >
+              <Link key={route} to={"/"} onClick={() => setIsOpen(false)}>
+                <li className="bg-gradient-to-b from-teal-700 to-teal-600 shadow w-full h-10 mb-2 flex items-center pl-4 hover:text-white hover:font-semibold hover:bg-white/20 text-xl rounded-sm">
                   Home
                 </li>
               </Link>
             );
           } else {
             return (
-              <Link to={`/${route}`} onClick={() => setIsOpen(false)}>
-                <li
-                  key={route}
-                  className="capitalize shadow w-full h-10 mb-2 flex items-center pl-4 hover:bg-blue-400/10 text-xl"
-                >
+              <Link
+                key={route}
+                to={`/${route}`}
+                onClick={() => setIsOpen(false)}
+              >
+                <li className="bg-gradient-to-b from-teal-700 to-teal-600 capitalize shadow w-full h-10 mb-2 flex items-center pl-4 hover:text-white hover:font-semibold hover:bg-white/20 text-xl rounded-sm">
                   {route}
                 </li>
               </Link>

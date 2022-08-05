@@ -92,7 +92,7 @@ const Imc = () => {
           </div>
         </div>
         <button
-          className="bg-amber-300 px-4 py-2 rounded-md shadow-md my-2 font-bold"
+          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-2 font-bold"
           onClick={handleResult}
         >
           Calculer un IMC
