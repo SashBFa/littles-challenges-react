@@ -3,6 +3,7 @@ import Navigation from "./components/Navigation";
 import Home from "./pages/home";
 import Imc from "./pages/imc";
 import Quizz from "./pages/quizz";
+import Wikiapp from "./pages/wikiapp";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/imc" element={<Imc />} />
         <Route path="/quizz" element={<Quizz />} />
+        <Route path="/wikiapp" element={<Wikiapp />} />
       </Routes>
     </BrowserRouter>
   );
