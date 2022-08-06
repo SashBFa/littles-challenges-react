@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Cookies from "./pages/cookies";
+import Gradiant from "./pages/gradiant";
 import Home from "./pages/home";
 import Imc from "./pages/imc";
 import Meteoapp from "./pages/meteoapp";
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/wikiapp" element={<Wikiapp />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/meteoapp" element={<Meteoapp />} />
+        <Route path="/gradiant" element={<Gradiant />} />
       </Routes>
     </BrowserRouter>
   );

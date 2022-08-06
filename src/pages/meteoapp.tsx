@@ -1,3 +1,5 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -48,6 +50,21 @@ const Meteoapp = () => {
   const [itemDisplay, setItemDisplay] = useState<itemDisplay>();
   const [toggleHours, setToggleHours] = useState<boolean>(true);
   const [togglePrev, setTogglePrev] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        const long = location.coords.longitude;
+        const lat = location.coords.latitude;
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&appid=${process.env.REACT_APP_WEATHER_KEY}`
+          )
+          .then((element) => thenDisplay(element.data))
+          .catch((err) => catchError());
+      });
+    }
+  }, []);
 
   const handleSearch = () => {
     axios
@@ -103,38 +120,43 @@ const Meteoapp = () => {
 
   return (
     <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-100 to-indigo-200 px-4 md:px-24">
-      <section className="relative flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
+      <section className="relative flex flex-col items-center mx-auto max-w-xs max-h-screen">
         <h2 className="text-center text-xl mb-3 md:text-3xl">
           Application <b>Météo</b> <span className="text-3xl">☀️</span>
         </h2>
-        <TextField
-          id="outlined-basic"
-          label="Votre ville :"
-          variant="filled"
-          value={search}
-          type="search"
-          fullWidth
-          className="bg-white shadow"
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-        />
+        <div className="flex items-center md:my-4 w-full">
+          <TextField
+            id="outlined-basic"
+            label="Choisissez une ville :"
+            variant="filled"
+            value={search}
+            type="search"
+            fullWidth
+            className="bg-white shadow"
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+          />
+          <button
+            className="bg-gradient-to-b from-teal-700 to-teal-600 text-white px-4 py-2 rounded-md shadow-md font-bold h-16 w-16 hover:scale-95"
+            onClick={handleSearch}
+          >
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-2xl drop-shadow"
+            />
+          </button>
+        </div>
         {errorSearch && (
           <div className="w-full py-2 shadow text-white rounded mt-4 text-center font-semibold text-lg bg-gradient-to-b from-red-600 to-red-500 drop-shadow-sm">
             {search.length <= 0
-              ? "Veuillez remplir le champ"
+              ? "Vous n'avez pas choisi de ville"
               : "Impossible de trouver cette ville"}
           </div>
         )}
-        <button
-          onClick={handleSearch}
-          className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4 hover:scale-95 mt-4"
-        >
-          Chercher
-        </button>
         {data && itemDisplay && (
           <article className="bg-gradient-to-t from-blue-100 to-white shadow-md rounded-md w-full mt-4">
             {
@@ -142,12 +164,12 @@ const Meteoapp = () => {
                 <img
                   src={`./images/meteo/${itemDisplay.icon}.svg`}
                   alt="icon_weather"
-                  className="w-44"
+                  className="h-36 md:h-48"
                 />
-                <h4 className="text-5xl font-bold">
+                <h4 className="text-3xl md:text-4xl font-bold">
                   {parseInt(itemDisplay.temp)}°
                 </h4>
-                <h3 className="font-light text-2xl my-4">
+                <h3 className="font-light text-xl md:text-2xl my-4">
                   {data.city.name}, <b>{data.city.country}</b>
                 </h3>
               </div>

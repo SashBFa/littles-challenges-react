@@ -12,3 +12,18 @@
   user-select: none;
   font-family: "Open Sans", sans-serif;
 }
+input[type="color"] {
+  -webkit-appearance: none;
+  border-radius: 10px;
+  border-color: white;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border-radius: 10px;
+  border-color: white;
+}
+.colorpick-eyedropper-input-trigger {
+  display: none;
+}

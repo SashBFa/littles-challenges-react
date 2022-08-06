@@ -3,7 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const router = ["home", "imc", "quizz", "wikiapp", "cookies", "meteoapp"];
+const router = [
+  "home",
+  "imc",
+  "quizz",
+  "wikiapp",
+  "cookies",
+  "meteoapp",
+  "gradiant",
+];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
