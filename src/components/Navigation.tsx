@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const router = ["home", "imc", "quizz", "wikiapp", "cookies"];
+const router = ["home", "imc", "quizz", "wikiapp", "cookies", "meteoapp"];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <nav className="w-screen p-4 absolute top-0 left-0 flex flex-row-reverse justify-between">
+    <nav className="w-screen p-4 fixed top-0 left-0 flex flex-row-reverse justify-between z-20">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`text-2xl w-8 h-8 mr-4 ${

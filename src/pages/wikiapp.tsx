@@ -1,3 +1,6 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -37,17 +40,23 @@ const Wikiapp = () => {
   };
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-100 to-indigo-200">
-      <section className="relative flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
-        <img src="./images/wiki-logo.png" alt="wiki-logo" />
-        <h2 className="text-3xl">
+    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-100 to-indigo-200 px-4">
+      <section className="relative flex flex-col items-center mx-auto max-w-xs md:max-w-xl lg:max-w-2xl">
+        <img
+          src="./images/wiki-logo.png"
+          alt="wiki-logo"
+          className="md:w-[350px]"
+        />
+        <h2 className="text-2xl md:text-4xl md:my-4">
           Recherche <b>Wikipedia</b>
         </h2>
         <div className="flex items-center my-4 w-full">
-          <input
-            type="text"
-            className="shadow w-full h-10 pl-2"
-            placeholder="Recherchez"
+          <TextField
+            id="outlined-basic"
+            label="Recherchez"
+            variant="filled"
+            fullWidth
+            className="bg-white shadow"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
@@ -57,10 +66,13 @@ const Wikiapp = () => {
             }}
           />
           <button
-            className="bg-gradient-to-b from-blue-800 to-blue-700 text-white px-4 py-2 rounded-md shadow-md font-bold h-12"
+            className="bg-gradient-to-b from-blue-800 to-blue-700 text-white px-4 py-2 rounded-md shadow-md font-bold h-16 w-16 hover:scale-95"
             onClick={handleSearch}
           >
-            Recherche
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-2xl drop-shadow"
+            />
           </button>
         </div>
         {isSearching && search.length > 0 && data.length === 0 && (
@@ -76,7 +88,7 @@ const Wikiapp = () => {
                   <h3 className="text-blue-800 text-2xl font-semibold">
                     {element.title}
                   </h3>
-                  <p className="text-green-500 italic">
+                  <p className="text-green-600 italic font-semibold">
                     https://en.wikipedia.org/?curid={element.pageid}
                   </p>
                   <p

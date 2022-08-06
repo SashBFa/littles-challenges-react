@@ -1,5 +1,6 @@
 import { faArrowsRotate, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -134,19 +135,18 @@ const Cookies = () => {
   }, [inputName, inputValue]);
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-r from-orange-100 to-lime-200">
+    <main className="min-h-screen pt-16 bg-gradient-to-r from-orange-100 to-lime-200 px-4 md:px-24">
       <section className="relative flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
-        <h2 className="text-2xl">
+        <h2 className="text-2xl md:text-4xl">
           Création de <b>Cookies</b> <span className="text-3xl">🍪</span>
         </h2>
-        <div className="flex flex-col w-full mt-4">
-          <label htmlFor="nameInput" className="text-xl font-semibold pl-2">
-            Nom du Cookie
-          </label>
-          <input
-            id="nameInput"
-            type="text"
-            className="h-10 shadow pl-2"
+        <div className="flex flex-col lg:flex-row gap-4 mt-4 w-full">
+          <TextField
+            id="outlined-basic"
+            label="Nom du Cookie"
+            variant="filled"
+            fullWidth
+            className="mt-4 bg-white shadow"
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
             onKeyDown={(e) => {
@@ -155,16 +155,12 @@ const Cookies = () => {
               }
             }}
           />
-        </div>
-
-        <div className="flex flex-col w-full mt-4">
-          <label htmlFor="valorInput" className="text-xl font-semibold pl-2">
-            Valeur du Cookie
-          </label>
-          <input
-            id="valorInput"
-            type="text"
-            className="h-10 shadow pl-2"
+          <TextField
+            id="outlined-basic"
+            label="Valeur du Cookie"
+            variant="filled"
+            fullWidth
+            className="mt-4 bg-white shadow"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
@@ -187,14 +183,14 @@ const Cookies = () => {
         <div className="mt-4">
           {updateItem ? (
             <button
-              className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4"
+              className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4 hover:scale-95"
               onClick={handleUpdateAction}
             >
               Modifier
             </button>
           ) : (
             <button
-              className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4"
+              className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4 hover:scale-95"
               onClick={handleCreate}
             >
               Créer
@@ -202,7 +198,7 @@ const Cookies = () => {
           )}
 
           <button
-            className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4"
+            className="bg-gradient-to-b from-teal-700 to-teal-600 shadow m-1 text-white font-semibold rounded-md py-2 px-4 hover:scale-95"
             onClick={() => setShowCookies(!showCookies)}
           >
             Afficher
@@ -222,14 +218,14 @@ const Cookies = () => {
                   <p>Valeur : {element.value}</p>
                   <div className="flex justify-around items-center mt-2 gap-2">
                     <button
-                      className="w-6 h-6 bg-gradient-to-b from-blue-600 to-blue-500 rounded text-white shadow"
+                      className="w-6 h-6 bg-gradient-to-b from-blue-600 to-blue-500 rounded text-white shadow hover:scale-95"
                       onClick={() => handleUpdate(element.id)}
                     >
                       <FontAwesomeIcon icon={faArrowsRotate} />
                     </button>
 
                     <button
-                      className="w-6 h-6 bg-gradient-to-b from-red-600 to-red-500 rounded text-white shadow"
+                      className="w-6 h-6 bg-gradient-to-b from-red-600 to-red-500 rounded text-white shadow hover:scale-95"
                       onClick={() => handleDelete(element.id)}
                     >
                       <FontAwesomeIcon icon={faXmark} />

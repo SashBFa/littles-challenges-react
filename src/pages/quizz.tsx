@@ -58,14 +58,14 @@ const Quizz = () => {
   }, [score]);
 
   return (
-    <main className="min-h-screen pt-16 bg-blue-100">
+    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-100 to-indigo-200 px-4">
       <section className="relative flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
-        <h1 className="text-xl">
+        <h2 className="text-center text-xl mb-3 md:text-3xl">
           <b>Quizz</b> Culture générale.
           <span className="border border-black bg-blue-700 text-white px-1 ml-2 rounded-sm">
             <FontAwesomeIcon icon={faCheck} />
           </span>
-        </h1>
+        </h2>
         {quizzData.map((question) => {
           const changeCheck = (e: string) => {
             const newObject = {
@@ -147,7 +147,7 @@ const Quizz = () => {
           );
         })}
         <button
-          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-2 font-bold mt-8"
+          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-2 font-bold mt-8 hover:scale-95"
           onClick={handleResult}
         >
           Valider <FontAwesomeIcon icon={faCheck} className="ml-2" />

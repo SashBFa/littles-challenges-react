@@ -1,5 +1,6 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import { BMIData } from "../data/imc";
 
@@ -10,8 +11,7 @@ const Imc = () => {
   const [imcInfo, setImcInfo] = useState<string>("");
   const [colorAlert, setColorAlert] = useState<string>("");
   const [colorResult, setColorResult] = useState<string>("");
-
-  console.log(imcSize);
+  const [resetIcon, setResetIcon] = useState<boolean>(false);
 
   const handleResult = () => {
     if (imcSize && imcSize > 60) {
@@ -27,12 +27,14 @@ const Imc = () => {
               setColorResult(element.color);
               setImcResult(imcCalcul);
               setImcInfo(element.name);
+              setResetIcon(true);
             }
           } else if (imcCalcul > element.range) {
             setColorAlert(element.color);
             setColorResult(element.color);
             setImcResult(imcCalcul);
             setImcInfo(element.name);
+            setResetIcon(true);
           }
         });
       } else {
@@ -55,59 +57,58 @@ const Imc = () => {
     setImcResult(0);
     setImcInfo("");
     setColorResult("text-black");
+    setResetIcon(false);
   };
 
   return (
-    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-500 to-indigo-500">
-      <section className="relative bg-white p-6 shadow-md rounded-md flex flex-col items-center mx-auto max-w-xs md:max-w-3xl">
-        <h1 className="text-center text-2xl mb-3">
+    <main className="min-h-screen pt-16 bg-gradient-to-r from-sky-100 to-indigo-200 px-4">
+      <section className="relative bg-gradient-to-b from-blue-100 to-white p-4 shadow-md rounded-md flex flex-col items-center mx-auto max-w-xs md:max-w-xl lg:max-w-4xl">
+        <h1 className="text-center text-2xl mb-3 md:text-4xl">
           Calcul d'<b>IMC</b>
         </h1>
-        <div className="flex flex-col md:flex-row gap-6">
-          <div>
-            <label htmlFor="imcSize" className="pl-4">
-              Votre taille en Cm, Ex: 180
-            </label>
-            <input
-              type="number"
-              id="imcSize"
-              placeholder="Votre taille en cm"
-              className="shadow-xl border w-full p-2 mt-1 mb-3"
-              value={imcSize}
-              onChange={(e) => setImcSize(parseInt(e.target.value))}
-            />
-          </div>
-          <div>
-            <label htmlFor="imcWeight" className="pl-4">
-              Votre poids en Kg, Ex: 80
-            </label>
-            <input
-              type="number"
-              id="imcWeight"
-              placeholder="Votre poids en kg"
-              className="shadow-xl border w-full p-2 mt-1 mb-3"
-              value={imcWeight}
-              onChange={(e) => setImcWeight(parseInt(e.target.value))}
-            />
-          </div>
+        <div className="flex flex-col lg:flex-row gap-4 w-full">
+          <TextField
+            id="outlined-basic"
+            label="Votre taille en Cm, Ex: 180"
+            variant="filled"
+            fullWidth
+            required
+            className="bg-white shadow"
+            value={imcSize}
+            onChange={(e) => setImcSize(parseInt(e.target.value))}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Votre poids en Kg, Ex: 80"
+            variant="filled"
+            fullWidth
+            required
+            className="bg-white shadow"
+            value={imcWeight}
+            onChange={(e) => setImcWeight(parseInt(e.target.value))}
+          />
         </div>
         <button
-          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-2 font-bold"
+          className="bg-gradient-to-b from-amber-300 to-amber-200 px-4 py-2 rounded-md shadow-md my-4 font-bold hover:scale-95"
           onClick={handleResult}
         >
-          Calculer un IMC
+          Calculer
         </button>
         <div
           className={`text-5xl drop-shadow-md font-bold my-3 ${colorResult}`}
         >
           {imcResult}
         </div>
-        <p className={`${colorAlert}`}>{imcInfo}</p>
-        <FontAwesomeIcon
-          icon={faTrash}
-          className="absolute bottom-7 drop-shadow-md right-6 text-amber-300"
-          onClick={handleReset}
-        />
+        <p className={`${colorAlert} md:text-2xl md:font-semibold`}>
+          {imcInfo}
+        </p>
+        {resetIcon && (
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="absolute top-7 drop-shadow-md right-6 text-xl cursor-pointer"
+            onClick={handleReset}
+          />
+        )}
       </section>
     </main>
   );
