@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const router = [
+export const router = [
   "home",
   "imc",
   "quizz",
@@ -11,6 +11,7 @@ const router = [
   "cookies",
   "meteoapp",
   "gradiant",
+  "pomodoro",
 ];
 
 const Navigation = () => {
@@ -19,9 +20,9 @@ const Navigation = () => {
     <nav className="w-screen p-4 fixed top-0 left-0 flex flex-row-reverse justify-between z-20">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`text-2xl w-8 h-8 mr-4 ${
+        className={`text-xl w-8 h-8 mr-4 ${
           isOpen ? "rotate-90" : ""
-        } transition-all duration-500 ease-in-out`}
+        } transition-all duration-500 ease-in-out shadow bg-white rounded-full`}
       >
         <FontAwesomeIcon icon={faBars} />
       </button>

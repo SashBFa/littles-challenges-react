@@ -1,9 +1,11 @@
 import { Slider } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Gradiant = () => {
   const [colorPrimary, setColorPrimary] = useState<string>("#FF5F6D");
   const [colorSecondary, setColorSecondary] = useState<string>("#FFC371");
+  const [yiqPrimary, setYiqPrimary] = useState<number>(147.706);
+  const [yiqSecondary, setYiqSecondary] = useState<number>(206.982);
   const [orientation, setOrientation] = useState<number>(90);
   const [copyGrad, setCopyGrad] = useState<boolean>(false);
   let randomColor1 = Math.floor(Math.random() * 16777215).toString(16);
@@ -28,6 +30,22 @@ const Gradiant = () => {
     setColorSecondary(`#${randomColor2}`);
   };
 
+  useEffect(() => {
+    const hexColor = colorPrimary.replace("#", "");
+    const red = parseInt(hexColor.slice(0, 2), 16);
+    const green = parseInt(hexColor.slice(2, 4), 16);
+    const blue = parseInt(hexColor.slice(4, 6), 16);
+    setYiqPrimary((red * 299 + green * 587 + blue * 144) / 1000);
+  }, [colorPrimary]);
+
+  useEffect(() => {
+    const hexColor = colorSecondary.replace("#", "");
+    const red = parseInt(hexColor.slice(0, 2), 16);
+    const green = parseInt(hexColor.slice(2, 4), 16);
+    const blue = parseInt(hexColor.slice(4, 6), 16);
+    setYiqSecondary((red * 299 + green * 587 + blue * 144) / 1000);
+  }, [colorSecondary]);
+
   return (
     <main
       className={`min-h-screen pt-16 px-4 md:px-24`}
@@ -40,7 +58,11 @@ const Gradiant = () => {
           htmlFor="colorPrimary"
           className="w-full h-10 relative my-2 cursor-pointer"
         >
-          <p className="absolute left-4 text-2xl top-1/2 -translate-y-1/2 uppercase font-semibold mix-blend-exclusion text-white">
+          <p
+            className={`absolute left-4 text-2xl top-1/2 -translate-y-1/2 uppercase font-semibold ${
+              yiqPrimary >= 128 ? "text-black" : "text-white"
+            }`}
+          >
             {colorPrimary}
           </p>
           <input
@@ -55,7 +77,11 @@ const Gradiant = () => {
           htmlFor="colorSecondary"
           className="w-full h-10 relative my-2 cursor-pointer"
         >
-          <p className="absolute left-4 text-2xl top-1/2 -translate-y-1/2 uppercase font-semibold mix-blend-exclusion text-white">
+          <p
+            className={`absolute left-4 text-2xl top-1/2 -translate-y-1/2 uppercase font-semibold ${
+              yiqSecondary >= 128 ? "text-black" : "text-white"
+            }`}
+          >
             {colorSecondary}
           </p>
           <input

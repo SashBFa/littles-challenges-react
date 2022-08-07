@@ -5,6 +5,7 @@ import Gradiant from "./pages/gradiant";
 import Home from "./pages/home";
 import Imc from "./pages/imc";
 import Meteoapp from "./pages/meteoapp";
+import Pomodoro from "./pages/pomodoro";
 import Quizz from "./pages/quizz";
 import Wikiapp from "./pages/wikiapp";
 
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/meteoapp" element={<Meteoapp />} />
         <Route path="/gradiant" element={<Gradiant />} />
+        <Route path="/pomodoro" element={<Pomodoro />} />
       </Routes>
     </BrowserRouter>
   );
