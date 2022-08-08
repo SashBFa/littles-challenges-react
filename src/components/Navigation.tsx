@@ -13,6 +13,7 @@ export const router = [
   "gradiant",
   "pomodoro",
   "formulaire",
+  "memory",
 ];
 
 const Navigation = () => {

@@ -5,6 +5,7 @@ import Formulaire from "./pages/formulaire";
 import Gradiant from "./pages/gradiant";
 import Home from "./pages/home";
 import Imc from "./pages/imc";
+import Memory from "./pages/memory";
 import Meteoapp from "./pages/meteoapp";
 import Pomodoro from "./pages/pomodoro";
 import Quizz from "./pages/quizz";
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/gradiant" element={<Gradiant />} />
         <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/formulaire" element={<Formulaire />} />
+        <Route path="/memory" element={<Memory />} />
       </Routes>
     </BrowserRouter>
   );
