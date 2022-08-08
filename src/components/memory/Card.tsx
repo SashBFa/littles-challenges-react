@@ -29,12 +29,18 @@ const Card = ({ card, setSelected, selected }: memoryCard) => {
     });
   }, [card.id, selected]);
 
+  const handleClick = () => {
+    if (!card.find) {
+      setSelected([...selected, card]);
+    }
+  };
+
   return (
     <div
-      className={`group w-16 h-16 md:w-32 md:h-32 lg:w-36 lg:h-36 text-black hover:cursor-pointer hover:scale-105 transition-all ${
-        card.find ? "opacity-0" : "opacity-100"
+      className={`group w-16 h-16 md:w-32 md:h-32 lg:w-36 lg:h-36 text-black  hover:scale-105 transition-all ${
+        card.find ? "opacity-0" : "opacity-100 hover:cursor-pointer"
       }`}
-      onClick={() => setSelected([...selected, card])}
+      onClick={() => handleClick()}
     >
       <div
         className={`relative bg-white w-full h-full rounded shadow transition-all duration-500 ease-in-out group-active:[transform:rotateY(180deg)] ${
