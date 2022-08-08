@@ -126,9 +126,8 @@ const Meteoapp = () => {
         </h2>
         <div className="flex items-center md:my-4 w-full">
           <TextField
-            id="outlined-basic"
             label="Choisissez une ville :"
-            variant="filled"
+            variant="outlined"
             value={search}
             type="search"
             fullWidth

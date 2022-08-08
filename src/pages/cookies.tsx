@@ -142,9 +142,9 @@ const Cookies = () => {
         </h2>
         <div className="flex flex-col lg:flex-row gap-4 mt-4 w-full">
           <TextField
-            id="outlined-basic"
+            type="text"
             label="Nom du Cookie"
-            variant="filled"
+            variant="outlined"
             fullWidth
             className="mt-4 bg-white shadow"
             value={inputName}
@@ -156,9 +156,9 @@ const Cookies = () => {
             }}
           />
           <TextField
-            id="outlined-basic"
+            type="text"
             label="Valeur du Cookie"
-            variant="filled"
+            variant="outlined"
             fullWidth
             className="mt-4 bg-white shadow"
             value={inputValue}

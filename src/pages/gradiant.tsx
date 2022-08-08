@@ -93,12 +93,13 @@ const Gradiant = () => {
           />
         </label>
 
-        <div className="mt-8 w-full px-4">
+        <div className="mt-8 w-full px-4 text-rose-700 bg-white pt-4 rounded-lg shadow">
           <Slider
             defaultValue={90}
             min={0}
             max={360}
             valueLabelDisplay="auto"
+            sx={{ color: "inherit" }}
             marks={[
               { value: 0, label: "0°" },
               { value: 360, label: "360°" },

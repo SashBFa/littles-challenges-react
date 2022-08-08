@@ -12,6 +12,7 @@ export const router = [
   "meteoapp",
   "gradiant",
   "pomodoro",
+  "formulaire",
 ];
 
 const Navigation = () => {

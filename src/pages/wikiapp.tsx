@@ -52,9 +52,9 @@ const Wikiapp = () => {
         </h2>
         <div className="flex items-center my-4 w-full">
           <TextField
-            id="outlined-basic"
+            type="search"
             label="Recherchez"
-            variant="filled"
+            variant="outlined"
             fullWidth
             className="bg-white shadow"
             value={search}

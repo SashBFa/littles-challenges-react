@@ -68,9 +68,9 @@ const Imc = () => {
         </h1>
         <div className="flex flex-col lg:flex-row gap-4 w-full">
           <TextField
-            id="outlined-basic"
+            type="number"
             label="Votre taille en Cm, Ex: 180"
-            variant="filled"
+            variant="outlined"
             fullWidth
             required
             className="bg-white shadow"
@@ -78,9 +78,9 @@ const Imc = () => {
             onChange={(e) => setImcSize(parseInt(e.target.value))}
           />
           <TextField
-            id="outlined-basic"
+            type="number"
             label="Votre poids en Kg, Ex: 80"
-            variant="filled"
+            variant="outlined"
             fullWidth
             required
             className="bg-white shadow"
