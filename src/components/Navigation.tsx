@@ -14,6 +14,7 @@ export const router = [
   "pomodoro",
   "formulaire",
   "memory",
+  "scroll",
 ];
 
 const Navigation = () => {
