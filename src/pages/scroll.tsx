@@ -42,46 +42,54 @@ type dataInterface = {
 
 const Scroll = () => {
   const observerElement = useRef<any>();
-  const [observerElementIsVisible, setObserverElementIsVisible] =
-    useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [maxPages, setMaxPages] = useState<number>(5);
   const [dataPicture, setDataPicture] = useState<dataInterface[]>([]);
   const [dataError, setDataError] = useState<string>("");
-  let pageIndex = 0;
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [pageIndex, setPageIndex] = useState<number>(1);
 
   const getSearch = () => {
     axios
       .get(
         `https://api.unsplash.com/search/photos?page=${pageIndex}&per_page=30&query=${
-          search ? search : "cat"
+          search !== "" ? search : "random"
         }&client_id=${process.env.REACT_APP_UNSPLASH_KEY}`
       )
       .then((img) => {
         setMaxPages(img.data.total_pages);
-        let arr = [...dataPicture, ...img.data.results];
-        console.log("newArr", [...dataPicture, ...img.data.results]);
-
-        setDataPicture([...dataPicture, ...arr]);
+        setDataPicture((dataPicture) => [...dataPicture, ...img.data.results]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setDataError("Désolé, nous n'avons rien trouvé !"));
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        setObserverElementIsVisible(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          pageIndex <= maxPages && pageIndex++;
-          console.log("page", pageIndex);
-          getSearch();
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { root: null, rootMargin: "50%", threshold: 0 }
     );
+
     observer.observe(observerElement.current);
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      if (pageIndex <= maxPages) {
+        setPageIndex(pageIndex + 1);
+        getSearch();
+        console.log("page", pageIndex);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisible]);
+
+  const handleSearch = () => {
+    setDataPicture([]);
+    setPageIndex(1);
+  };
 
   return (
     <main className="min-h-screen pt-16 bg-gradient-to-r from-orange-100 to-lime-200 px-4 md:px-24">
@@ -102,16 +110,16 @@ const Scroll = () => {
               }}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              // onKeyDown={(e) => {
-              //   if (e.key === "Enter") {
-              //     getSearch();
-              //   }
-              // }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
             />
           </div>
           <button
             className="bg-gradient-to-b from-lime-600 to-lime-500 text-white px-4 py-2 rounded-md shadow-md font-bold h-16 w-16 hover:scale-95"
-            // onClick={() => getSearch()}
+            onClick={handleSearch}
           >
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
@@ -131,7 +139,7 @@ const Scroll = () => {
               />
             ))}
         </div>
-        <div ref={observerElement} className="bg-red-500 w-full h-32" />
+        <div ref={observerElement} className="w-full h-32" />
       </section>
     </main>
   );
