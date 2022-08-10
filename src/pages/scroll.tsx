@@ -31,12 +31,19 @@ const CssTextField = styled(TextField)({
 type dataInterface = {
   id: string;
   urls: {
+    raw: string;
+    full: string;
     regular: string;
+    small: string;
+    thumb: string;
+    small_s3: string;
   };
 };
 
 const Scroll = () => {
-  const observerElement = useRef(null);
+  const observerElement = useRef<any>();
+  const [observerElementIsVisible, setObserverElementIsVisible] =
+    useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [maxPages, setMaxPages] = useState<number>(5);
   const [dataPicture, setDataPicture] = useState<dataInterface[]>([]);
@@ -51,37 +58,29 @@ const Scroll = () => {
         }&client_id=${process.env.REACT_APP_UNSPLASH_KEY}`
       )
       .then((img) => {
-        console.log("fetch");
         setMaxPages(img.data.total_pages);
-        console.log([...dataPicture, img.data.results]);
+        let arr = [...dataPicture, ...img.data.results];
+        console.log("newArr", [...dataPicture, ...img.data.results]);
 
-        dataPicture.length >= 1
-          ? setDataPicture((prevArr) => [...prevArr, img.data.results])
-          : setDataPicture(img.data.results);
-        console.log(dataPicture);
+        setDataPicture([...dataPicture, ...arr]);
       })
-      .catch((err) => setDataError("Désolé, nous n'avons pas trouvé !"));
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        const entry = entries[0];
+        setObserverElementIsVisible(entry.isIntersecting);
         if (entry.isIntersecting) {
           pageIndex <= maxPages && pageIndex++;
-          console.log(pageIndex);
+          console.log("page", pageIndex);
           getSearch();
-          //do your actions here
         }
       },
-      {
-        root: null,
-        rootMargin: "50%",
-        threshold: 0,
-      }
+      { root: null, rootMargin: "50%", threshold: 0 }
     );
-    if (observerElement.current) {
-      observer.observe(observerElement.current);
-    }
+    observer.observe(observerElement.current);
   }, []);
 
   return (
@@ -126,13 +125,13 @@ const Scroll = () => {
             dataPicture.map((image) => (
               <img
                 key={image.id}
-                src={`${image.urls.regular}`}
+                src={`${image.urls?.regular}`}
                 alt="ima"
                 className="mb-2 rounded shadow"
               />
             ))}
         </div>
-        <div ref={observerElement} />
+        <div ref={observerElement} className="bg-red-500 w-full h-32" />
       </section>
     </main>
   );
