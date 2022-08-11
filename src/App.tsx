@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import Carrousel from "./pages/carrousel";
 import Cookies from "./pages/cookies";
 import Formulaire from "./pages/formulaire";
 import Gradiant from "./pages/gradiant";
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/formulaire" element={<Formulaire />} />
         <Route path="/memory" element={<Memory />} />
         <Route path="/scroll" element={<Scroll />} />
+        <Route path="/carrousel" element={<Carrousel />} />
       </Routes>
     </BrowserRouter>
   );

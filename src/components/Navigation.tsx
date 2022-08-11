@@ -15,6 +15,7 @@ export const router = [
   "formulaire",
   "memory",
   "scroll",
+  "carrousel",
 ];
 
 const Navigation = () => {
