@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import Imc from "./pages/imc";
 import Memory from "./pages/memory";
 import Meteoapp from "./pages/meteoapp";
+import Password from "./pages/password";
 import Pomodoro from "./pages/pomodoro";
 import Quizz from "./pages/quizz";
 import Scroll from "./pages/scroll";
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/memory" element={<Memory />} />
         <Route path="/scroll" element={<Scroll />} />
         <Route path="/carrousel" element={<Carrousel />} />
+        <Route path="/password" element={<Password />} />
       </Routes>
     </BrowserRouter>
   );
