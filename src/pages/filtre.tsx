@@ -80,42 +80,81 @@ const Filtre = () => {
   }, []);
 
   useEffect(() => {
-    if (userData) {
-      console.log(sortedField);
+    if (userData.length > 0) {
+      let sortedProducts;
 
-      const sortedProducts = userData.sort((a: any, b: any) => {
-        let ElemA;
-        let ElemB;
-        switch (sortedField) {
-          case "name":
-            ElemA = a.name.last;
-            ElemB = b.name.last;
-            break;
-          case "email":
-            ElemA = a.email;
-            ElemB = b.email;
-            break;
-          case "phone":
-            ElemA = a.phone;
-            ElemB = b.phone;
-            break;
-          default:
-            ElemA = a.name.last;
-            ElemB = b.name.last;
-            break;
-        }
-        if (ElemA < ElemB) {
-          return -1;
-        }
-        if (ElemA > ElemB) {
-          return 1;
-        }
-        return 0;
-      });
+      switch (sortedField) {
+        case "name":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(a.name.last, b.name.last);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+        case "name-rev":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(b.name.last, a.name.last);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
 
-      setUserFiltred(sortedProducts);
+        case "email":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(a.email, b.email);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+        case "email-rev":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(b.email, a.email);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+        case "phone":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(a.phone, b.phone);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+        case "phone-rev":
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(b.phone, a.phone);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+
+        default:
+          sortedProducts = [...userData].sort(
+            (a: userDataInterface, b: userDataInterface) => {
+              return sortData(a.name.last, b.name.last);
+            }
+          );
+          setUserFiltred(sortedProducts);
+          break;
+      }
     }
   }, [userData, sortedField]);
+
+  function sortData(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a === b) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
 
   useEffect(() => {
     if (filterEntry === "") {
@@ -154,7 +193,7 @@ const Filtre = () => {
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 px-4 lg:hidden">
           {userFiltred &&
-            userFiltred.map((person, index) => (
+            userFiltred.map((person) => (
               <li
                 key={person.login.uuid}
                 className={`flex flex-col items-center bg-white
@@ -175,16 +214,40 @@ const Filtre = () => {
         </ul>
         <table className="hidden lg:table table-auto w-full border-separate border-spacing-y-1">
           <thead>
-            <tr className="text-white text-4xl font-bold">Database Results</tr>
+            <tr className="text-white text-4xl font-bold">
+              <th>Database Results</th>
+            </tr>
             <tr className="text-left h-12 text-white text-xl">
               <th>
-                <button onClick={() => setSortedField("name")}>Name</button>
+                <button
+                  onClick={() =>
+                    setSortedField(sortedField === "name" ? "name-rev" : "name")
+                  }
+                >
+                  Name
+                </button>
               </th>
               <th>
-                <button onClick={() => setSortedField("email")}>Email</button>
+                <button
+                  onClick={() =>
+                    setSortedField(
+                      sortedField === "email" ? "email-rev" : "email"
+                    )
+                  }
+                >
+                  Email
+                </button>
               </th>
               <th>
-                <button onClick={() => setSortedField("phone")}>Phone</button>
+                <button
+                  onClick={() =>
+                    setSortedField(
+                      sortedField === "phone" ? "phone-rev" : "phone"
+                    )
+                  }
+                >
+                  Phone
+                </button>
               </th>
             </tr>
           </thead>
