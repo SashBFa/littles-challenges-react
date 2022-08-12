@@ -17,6 +17,7 @@ export const router = [
   "scroll",
   "carrousel",
   "password",
+  "filtre",
 ];
 
 const Navigation = () => {
